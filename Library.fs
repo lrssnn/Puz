@@ -1,5 +1,6 @@
 ﻿namespace Puz
 
+open System
 open FSharpx.String
 
 module Convenience =
@@ -10,6 +11,10 @@ module Convenience =
 
     let splitOnce char input =
         let seq = splitChar' [| char |] 2 input
+        (Array.head seq, Array.exactlyOne (Array.tail seq))
+
+    let splitOnceStr str input =
+        let seq = splitString' [| str |] 2 StringSplitOptions.None input
         (Array.head seq, Array.exactlyOne (Array.tail seq))
 
     /// Generate all possible neighbours of the given coordinates, as a sequence of (row * col) tuples
