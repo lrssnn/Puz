@@ -22,3 +22,5 @@ let readLinesAsInts (path: string) (separator: char) : int list list =
     |> List.map (fun line -> line.Trim() |> _.Split(separator) |> Array.toList |> List.map int)
 
 let readAsCharA2D text = text |> splitChar [| '\n' |] |> array2D
+
+let readLines text = text |> splitChar [| '\n' |]
