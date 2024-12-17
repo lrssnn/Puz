@@ -24,3 +24,12 @@ let readLinesAsInts (path: string) (separator: char) : int list list =
 let readAsCharA2D text = text |> splitChar [| '\n' |] |> array2D
 
 let readLines text = text |> splitChar [| '\n' |]
+let readLinesList text = text |> readLines |> List.ofArray
+
+let readAsCharListList text =
+    text |> readLinesList |> List.map List.ofSeq
+
+let readAsMappedListList charMapper text =
+    text
+    |> readLinesList
+    |> List.map (fun line -> line |> Seq.map charMapper |> List.ofSeq)
