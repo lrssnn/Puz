@@ -49,7 +49,7 @@ module Pathfinding =
     // Convert a path through the grid of characters into a sequence. Assumes that the grid contains
     // exactly one path with no branching, i.e. for any given non-space character, it has exactly
     // Two non-space neighbours (the one we came from, and the one we will go to
-    let rec pathFollower (grid: char array2d) current cameFrom acc terminator =
+    let rec pathFollower (grid: char array2d) current cameFrom acc terminator barrier =
         let acc = grid[fst current, snd current] :: acc
 
         if current ||> Array2D.get grid = terminator then
@@ -62,7 +62,7 @@ module Pathfinding =
                 |> List.filter (fun (x, y) ->
                     (inbounds grid x y)
                     && (not (tupleEquals (x, y) cameFrom))
-                    && not ((grid[x, y] = ' ')))
+                    && not ((grid[x, y] = barrier)))
                 |> List.exactlyOne
 
-            pathFollower grid nextCoord current acc terminator
+            pathFollower grid nextCoord current acc terminator barrier
